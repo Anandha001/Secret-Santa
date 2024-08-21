@@ -11,3 +11,20 @@ class Employee:
 
     def __hash__(self):
         return hash(self.email)
+
+
+class SecretSantaAssignment:
+    def __init__(self):
+        self.employees = []
+        self.previous_assignments = {}
+
+    def add_employee(self, name: str, email: str):
+        employee = Employee(name, email)
+        self.employees.append(employee)
+
+    def add_previous_assignment(
+        self, giver_name: str, giver_email: str, receiver_name: str, receiver_email: str
+    ):
+        giver = Employee(giver_name, giver_email)
+        receiver = Employee(receiver_name, receiver_email)
+        self.previous_assignments[giver] = receiver
