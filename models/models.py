@@ -28,3 +28,24 @@ class SecretSantaAssignment:
         giver = Employee(giver_name, giver_email)
         receiver = Employee(receiver_name, receiver_email)
         self.previous_assignments[giver] = receiver
+
+    def assign_secret_santa(self) -> dict[Employee, Employee]:
+        new_assignments = {}
+        remaining_employees = set(self.employees)
+
+        for giver in self.employees:
+            potential_receivers = remaining_employees - {giver}
+
+            previous_receiver = self.previous_assignments.get(giver)
+            if previous_receiver in potential_receivers:
+                potential_receivers.remove(previous_receiver)
+
+            if potential_receivers:
+                receiver = potential_receivers.pop()
+                new_assignments[giver] = receiver
+                remaining_employees.remove(receiver)
+
+        return new_assignments
+
+    def __repr__(self):
+        return f"SecretSantaAssignment(employees={self.employees}, previous_assignments={self.previous_assignments})"
