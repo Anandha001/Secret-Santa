@@ -19,10 +19,3 @@ class FileReadError(DigitalXCError):
     def __init__(self, file_uri: str) -> None:
         message = f"File '{file_uri}' could not be read."
         super().__init__(message)
-
-
-class FileWriteError(DigitalXCError):
-
-    def __init__(self, file_uri: str) -> None:
-        message = f"File '{file_uri}' could not be read."
-        super().__init__(message)
