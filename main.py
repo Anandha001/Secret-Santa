@@ -1,12 +1,12 @@
-from models.models import SecretSantaAssignment
-from services.assignment_services import setup_secret_santa
+from fastapi import FastAPI
+from routes import router
 
-
-secret_santa = SecretSantaAssignment()
-
-setup_secret_santa(
-    secret_santa=secret_santa,
-    employee_uri="input/Employee-List.xlsx",
-    previous_assignment_uri="input/Secret-Santa-Game-Result-2023.xlsx",
-    new_assignment_uri="output/Secret-Santa-Game-Result.xlsx",
+app = FastAPI(
+    title="Secret Santa",
+    version="1.0",
+    contact={
+        "name": "Anandha",
+        "email": "anandhakannan0001@gmail.com",
+    },
 )
+app.include_router(router, prefix="/api/v1")
