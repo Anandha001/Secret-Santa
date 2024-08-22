@@ -33,21 +33,22 @@ def get_new_secret_santa_assignment(
 
     secret_santa = SecretSantaAssignment()
 
-    employees_df = load_dataframe(employee_file)
+    employees_df = load_dataframe(file=employee_file)
     for _, row in employees_df.iterrows():
-        secret_santa.add_employee(row["Employee_Name"], row["Employee_EmailID"])
+        secret_santa.add_employee(
+            name=row["Employee_Name"], email=row["Employee_EmailID"]
+        )
 
-    previous_assignments_df = load_dataframe(previous_assignment_file)
+    previous_assignments_df = load_dataframe(file=previous_assignment_file)
     for _, row in previous_assignments_df.iterrows():
         secret_santa.add_previous_assignment(
-            row["Employee_Name"],
-            row["Employee_EmailID"],
-            row["Secret_Child_Name"],
-            row["Secret_Child_EmailID"],
+            giver_name=row["Employee_Name"],
+            giver_email=row["Employee_EmailID"],
+            receiver_name=row["Secret_Child_Name"],
+            receiver_email=row["Secret_Child_EmailID"],
         )
 
     new_assignment_df = secret_santa.assign_secret_santa()
-
     file_uri = get_temp_file_uri(new_assignment_df, background_tasks)
 
     return FileResponse(
