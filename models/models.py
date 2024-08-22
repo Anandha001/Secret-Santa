@@ -1,3 +1,4 @@
+import random
 import pandas as pd
 
 
@@ -46,7 +47,7 @@ class SecretSantaAssignment:
                 potential_receivers.remove(previous_receiver)
 
             if potential_receivers:
-                receiver = potential_receivers.pop()
+                receiver = random.choice(list(potential_receivers))
                 remaining_employees.remove(receiver)
                 new_assignments_df = new_assignments_df._append(
                     {
